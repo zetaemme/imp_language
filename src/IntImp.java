@@ -141,7 +141,7 @@ public class IntImp extends ImpBaseVisitor<Value> {
             case ImpParser.MOD : result = new NaturalValue(left % right);
         }
 
-        return result; // dumb return (non-reachable code)
+        return result;
     }
 
     @Override
@@ -157,7 +157,7 @@ public class IntImp extends ImpBaseVisitor<Value> {
             result = new NaturalValue(Math.max(left - right, 0));
         }
 
-        return result; // dumb return (non-reachable code)
+        return result;
     }
 
     @Override
@@ -174,7 +174,7 @@ public class IntImp extends ImpBaseVisitor<Value> {
             case ImpParser.GT  : result = new BooleanValue(left > right);
         }
 
-        return result; // dumb return (non-reachable code)
+        return result;
     }
 
     @Override
@@ -190,7 +190,7 @@ public class IntImp extends ImpBaseVisitor<Value> {
             result = new BooleanValue(!left.equals(right));
         }
 
-        return result; // dumb return (non-reachable code)
+        return result;
     }
 
     @Override
@@ -206,7 +206,7 @@ public class IntImp extends ImpBaseVisitor<Value> {
             result = new BooleanValue(left || right);
         }
 
-        return result; // dumb return (non-reachable code)
+        return result;
     }
 
     @Override
