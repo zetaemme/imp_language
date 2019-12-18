@@ -57,7 +57,7 @@ OUT    : 'out' ;
 FOR    : 'for' ;
 DO     : 'do' ;
 ELSEIF : 'elseif' ;
-ND    : 'nd' ;
+ND     : 'nd' ;
 
 LPAR      : '(' ;
 RPAR      : ')';
