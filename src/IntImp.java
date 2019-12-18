@@ -4,52 +4,9 @@ public class IntImp extends ImpBaseVisitor<Value> {
 
     private final Conf conf;
 
+    // Constructor
     public IntImp(Conf conf) {
         this.conf = conf;
-    }
-
-    private ComValue visitCom(ImpParser.ComContext ctx) {
-        return (ComValue) visit(ctx);
-    }
-
-    private ExpValue<?> visitExp(ImpParser.ExpContext ctx) {
-        return (ExpValue<?>) visit(ctx);
-    }
-
-    private int visitNatExp(ImpParser.ExpContext ctx) {
-        try {
-            return ((NaturalValue) visit(ctx)).toJavaValue();
-        }
-        catch(ClassCastException e) {
-            System.err.println("Type mismatch in the expression:");
-            System.err.println();
-            System.err.println(ctx.getText());
-            System.err.println();
-            System.err.println("@" + ctx.start.getLine() + ":" + ctx.start.getStartIndex());
-            System.err.println("> Numerical expression expected");
-
-            System.exit(1);
-        }
-
-        return 0; // dumb return (non-reachable code)
-    }
-
-    private boolean visitBoolExp(ImpParser.ExpContext ctx) {
-        try {
-            return ((BooleanValue) visit(ctx)).toJavaValue();
-        }
-        catch(ClassCastException e) {
-            System.err.println("Type mismatch:");
-            System.err.println(">>>>");
-            System.err.println(ctx.getText());
-            System.err.println("<<<<");
-            System.err.println("@" + ctx.start.getLine() + ":" + ctx.start.getCharPositionInLine());
-            System.err.println("> Boolean expression expected");
-
-            System.exit(1);
-        }
-
-        return false; // dumb return (non-reachable code)
     }
 
     @Override
@@ -57,10 +14,17 @@ public class IntImp extends ImpBaseVisitor<Value> {
         return visitCom(ctx.com());
     }
 
-    @Override
+    private ComValue visitCom(ImpParser.ComContext ctx) {
+        return (ComValue) visit(ctx);
+    }
+
+    // ---------- COMMANDS ----------
+
+    // TODO if-elseif-else
+    /*@Override
     public ComValue visitIf(ImpParser.IfContext ctx) {
         return visitBoolExp(ctx.exp()) ? visitCom(ctx.com(0)) : visitCom(ctx.com(1));
-    }
+    }*/
 
     @Override
     public ComValue visitAssign(ImpParser.AssignContext ctx) {
@@ -100,6 +64,52 @@ public class IntImp extends ImpBaseVisitor<Value> {
         return ComValue.INSTANCE;
     }
 
+    // TODO for, doWhile, nd
+
+    // ---------------------------------
+
+    private ExpValue<?> visitExp(ImpParser.ExpContext ctx) {
+        return (ExpValue<?>) visit(ctx);
+    }
+
+    // ---------- EXPRESSIONS ----------
+
+    private int visitNatExp(ImpParser.ExpContext ctx) {
+        try {
+            return ((NaturalValue) visit(ctx)).toJavaValue();
+        }
+        catch(ClassCastException e) {
+            System.err.println("Type mismatch in the expression:");
+            System.err.println();
+            System.err.println(ctx.getText());
+            System.err.println();
+            System.err.println("@" + ctx.start.getLine() + ":" + ctx.start.getStartIndex());
+            System.err.println("> Numerical expression expected");
+
+            System.exit(1);
+        }
+
+        return 0; // dumb return (non-reachable code)
+    }
+
+    private boolean visitBoolExp(ImpParser.ExpContext ctx) {
+        try {
+            return ((BooleanValue) visit(ctx)).toJavaValue();
+        }
+        catch(ClassCastException e) {
+            System.err.println("Type mismatch:");
+            System.err.println(">>>>");
+            System.err.println(ctx.getText());
+            System.err.println("<<<<");
+            System.err.println("@" + ctx.start.getLine() + ":" + ctx.start.getCharPositionInLine());
+            System.err.println("> Boolean expression expected");
+
+            System.exit(1);
+        }
+
+        return false; // dumb return (non-reachable code)
+    }
+
     @Override
     public NaturalValue visitNat(ImpParser.NatContext ctx) {
         return new NaturalValue(Integer.parseInt(ctx.NAT().getText()));
@@ -116,17 +126,18 @@ public class IntImp extends ImpBaseVisitor<Value> {
     }
 
     @Override
-    public ExpValue<?> visitNot(ImpParser.NotContext ctx) {
-        return new BooleanValue(!visitBoolExp(ctx.exp()));
-    }
-
-    @Override
     public NaturalValue visitPow(ImpParser.PowContext ctx) {
         int base = visitNatExp(ctx.exp(0));
         int exp = visitNatExp(ctx.exp(1));
 
         return new NaturalValue((int) Math.pow(base, exp));
     }
+
+    @Override
+    public ExpValue<?> visitNot(ImpParser.NotContext ctx) {
+        return new BooleanValue(!visitBoolExp(ctx.exp()));
+    }
+
 
     @Override
     public NaturalValue visitDivMulMod(ImpParser.DivMulModContext ctx) {
@@ -218,4 +229,6 @@ public class IntImp extends ImpBaseVisitor<Value> {
 
         return conf.get(ctx.ID().getText());
     }
+
+    // ---------------------------------
 }
