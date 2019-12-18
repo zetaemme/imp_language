@@ -2,12 +2,15 @@ grammar Imp;
 
 prog : com EOF ;
 
-com : IF LPAR exp RPAR THEN LBRACE com RBRACE ELSE LBRACE com RBRACE    # if
-    | ID ASSIGN exp                                                     # assign
-    | SKIPP                                                             # skip
-    | com SEMICOLON com                                                 # seq
-    | WHILE LPAR exp RPAR LBRACE com RBRACE                             # while
-    | OUT LPAR exp RPAR                                                 # out
+com : IF LPAR exp RPAR THEN LBRACE com RBRACE ((ELSEIF LPAR exp RPAR LBRACE com RBRACE)* ELSE LBRACE com RBRACE)?   # if
+    | ID ASSIGN exp                                                                                                 # assign
+    | SKIPP                                                                                                         # skip
+    | com SEMICOLON com                                                                                             # seq
+    | WHILE LPAR exp RPAR LBRACE com RBRACE                                                                         # while
+    | OUT LPAR exp RPAR                                                                                             # out
+    | FOR LPAR com SEMICOLON exp SEMICOLON com RPAR LBRACE com RBRACE                                               # for
+    | DO LBRACE com RBRACE WHILE LPAR exp RPAR                                                                      # doWhile
+    | ND LPAR com ',' com RPAR                                                                                      # nd
     ;
 
 exp : NAT                                 # nat
@@ -51,6 +54,10 @@ WHILE  : 'while' ;
 SKIPP  : 'skip' ;
 ASSIGN : '=' ;
 OUT    : 'out' ;
+FOR    : 'for' ;
+DO     : 'do' ;
+ELSEIF : 'elseif' ;
+ND    : 'nd' ;
 
 LPAR      : '(' ;
 RPAR      : ')';

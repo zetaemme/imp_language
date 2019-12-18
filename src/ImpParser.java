@@ -1,4 +1,4 @@
-// Generated from /home/samuele/Desktop/lab04/ex/imp/src/Imp.g4 by ANTLR 4.7.2
+// Generated from /home/mattiazorzan/IdeaProjects/imp_language/src/Imp.g4 by ANTLR 4.7.2
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -16,10 +16,10 @@ public class ImpParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		NAT=1, BOOL=2, PLUS=3, MINUS=4, MUL=5, DIV=6, MOD=7, POW=8, AND=9, OR=10, 
-		EQQ=11, NEQ=12, LEQ=13, GEQ=14, LT=15, GT=16, NOT=17, IF=18, THEN=19, 
-		ELSE=20, WHILE=21, SKIPP=22, ASSIGN=23, OUT=24, LPAR=25, RPAR=26, LBRACE=27, 
-		RBRACE=28, SEMICOLON=29, ID=30, WS=31;
+		T__0=1, NAT=2, BOOL=3, PLUS=4, MINUS=5, MUL=6, DIV=7, MOD=8, POW=9, AND=10, 
+		OR=11, EQQ=12, NEQ=13, LEQ=14, GEQ=15, LT=16, GT=17, NOT=18, IF=19, THEN=20, 
+		ELSE=21, WHILE=22, SKIPP=23, ASSIGN=24, OUT=25, FOR=26, DO=27, ELSEIF=28, 
+		ND=29, LPAR=30, RPAR=31, LBRACE=32, RBRACE=33, SEMICOLON=34, ID=35, WS=36;
 	public static final int
 		RULE_prog = 0, RULE_com = 1, RULE_exp = 2;
 	private static String[] makeRuleNames() {
@@ -31,19 +31,19 @@ public class ImpParser extends Parser {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, null, null, "'+'", "'-'", "'*'", "'/'", "'mod'", "'^'", "'&'", 
-			"'|'", "'=='", "'!='", "'<='", "'>='", "'<'", "'>'", "'!'", "'if'", "'then'", 
-			"'else'", "'while'", "'skip'", "'='", "'out'", "'('", "')'", "'{'", "'}'", 
-			"';'"
+			null, "','", null, null, "'+'", "'-'", "'*'", "'/'", "'mod'", "'^'", 
+			"'&'", "'|'", "'=='", "'!='", "'<='", "'>='", "'<'", "'>'", "'!'", "'if'", 
+			"'then'", "'else'", "'while'", "'skip'", "'='", "'out'", "'for'", "'do'", 
+			"'elseif'", "'nd'", "'('", "')'", "'{'", "'}'", "';'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, "NAT", "BOOL", "PLUS", "MINUS", "MUL", "DIV", "MOD", "POW", "AND", 
-			"OR", "EQQ", "NEQ", "LEQ", "GEQ", "LT", "GT", "NOT", "IF", "THEN", "ELSE", 
-			"WHILE", "SKIPP", "ASSIGN", "OUT", "LPAR", "RPAR", "LBRACE", "RBRACE", 
-			"SEMICOLON", "ID", "WS"
+			null, null, "NAT", "BOOL", "PLUS", "MINUS", "MUL", "DIV", "MOD", "POW", 
+			"AND", "OR", "EQQ", "NEQ", "LEQ", "GEQ", "LT", "GT", "NOT", "IF", "THEN", 
+			"ELSE", "WHILE", "SKIPP", "ASSIGN", "OUT", "FOR", "DO", "ELSEIF", "ND", 
+			"LPAR", "RPAR", "LBRACE", "RBRACE", "SEMICOLON", "ID", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -147,6 +147,69 @@ public class ImpParser extends Parser {
 			super.copyFrom(ctx);
 		}
 	}
+	public static class DoWhileContext extends ComContext {
+		public TerminalNode DO() { return getToken(ImpParser.DO, 0); }
+		public TerminalNode LBRACE() { return getToken(ImpParser.LBRACE, 0); }
+		public ComContext com() {
+			return getRuleContext(ComContext.class,0);
+		}
+		public TerminalNode RBRACE() { return getToken(ImpParser.RBRACE, 0); }
+		public TerminalNode WHILE() { return getToken(ImpParser.WHILE, 0); }
+		public TerminalNode LPAR() { return getToken(ImpParser.LPAR, 0); }
+		public ExpContext exp() {
+			return getRuleContext(ExpContext.class,0);
+		}
+		public TerminalNode RPAR() { return getToken(ImpParser.RPAR, 0); }
+		public DoWhileContext(ComContext ctx) { copyFrom(ctx); }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ImpVisitor ) return ((ImpVisitor<? extends T>)visitor).visitDoWhile(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class NdContext extends ComContext {
+		public TerminalNode ND() { return getToken(ImpParser.ND, 0); }
+		public TerminalNode LPAR() { return getToken(ImpParser.LPAR, 0); }
+		public List<ComContext> com() {
+			return getRuleContexts(ComContext.class);
+		}
+		public ComContext com(int i) {
+			return getRuleContext(ComContext.class,i);
+		}
+		public TerminalNode RPAR() { return getToken(ImpParser.RPAR, 0); }
+		public NdContext(ComContext ctx) { copyFrom(ctx); }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ImpVisitor ) return ((ImpVisitor<? extends T>)visitor).visitNd(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class ForContext extends ComContext {
+		public TerminalNode FOR() { return getToken(ImpParser.FOR, 0); }
+		public TerminalNode LPAR() { return getToken(ImpParser.LPAR, 0); }
+		public List<ComContext> com() {
+			return getRuleContexts(ComContext.class);
+		}
+		public ComContext com(int i) {
+			return getRuleContext(ComContext.class,i);
+		}
+		public List<TerminalNode> SEMICOLON() { return getTokens(ImpParser.SEMICOLON); }
+		public TerminalNode SEMICOLON(int i) {
+			return getToken(ImpParser.SEMICOLON, i);
+		}
+		public ExpContext exp() {
+			return getRuleContext(ExpContext.class,0);
+		}
+		public TerminalNode RPAR() { return getToken(ImpParser.RPAR, 0); }
+		public TerminalNode LBRACE() { return getToken(ImpParser.LBRACE, 0); }
+		public TerminalNode RBRACE() { return getToken(ImpParser.RBRACE, 0); }
+		public ForContext(ComContext ctx) { copyFrom(ctx); }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ImpVisitor ) return ((ImpVisitor<? extends T>)visitor).visitFor(this);
+			else return visitor.visitChildren(this);
+		}
+	}
 	public static class SkipContext extends ComContext {
 		public TerminalNode SKIPP() { return getToken(ImpParser.SKIPP, 0); }
 		public SkipContext(ComContext ctx) { copyFrom(ctx); }
@@ -177,11 +240,20 @@ public class ImpParser extends Parser {
 	}
 	public static class IfContext extends ComContext {
 		public TerminalNode IF() { return getToken(ImpParser.IF, 0); }
-		public TerminalNode LPAR() { return getToken(ImpParser.LPAR, 0); }
-		public ExpContext exp() {
-			return getRuleContext(ExpContext.class,0);
+		public List<TerminalNode> LPAR() { return getTokens(ImpParser.LPAR); }
+		public TerminalNode LPAR(int i) {
+			return getToken(ImpParser.LPAR, i);
 		}
-		public TerminalNode RPAR() { return getToken(ImpParser.RPAR, 0); }
+		public List<ExpContext> exp() {
+			return getRuleContexts(ExpContext.class);
+		}
+		public ExpContext exp(int i) {
+			return getRuleContext(ExpContext.class,i);
+		}
+		public List<TerminalNode> RPAR() { return getTokens(ImpParser.RPAR); }
+		public TerminalNode RPAR(int i) {
+			return getToken(ImpParser.RPAR, i);
+		}
 		public TerminalNode THEN() { return getToken(ImpParser.THEN, 0); }
 		public List<TerminalNode> LBRACE() { return getTokens(ImpParser.LBRACE); }
 		public TerminalNode LBRACE(int i) {
@@ -198,6 +270,10 @@ public class ImpParser extends Parser {
 			return getToken(ImpParser.RBRACE, i);
 		}
 		public TerminalNode ELSE() { return getToken(ImpParser.ELSE, 0); }
+		public List<TerminalNode> ELSEIF() { return getTokens(ImpParser.ELSEIF); }
+		public TerminalNode ELSEIF(int i) {
+			return getToken(ImpParser.ELSEIF, i);
+		}
 		public IfContext(ComContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
@@ -259,11 +335,12 @@ public class ImpParser extends Parser {
 		ComContext _prevctx = _localctx;
 		int _startState = 2;
 		enterRecursionRule(_localctx, 2, RULE_com, _p);
+		int _la;
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(40);
+			setState(83);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case IF:
@@ -288,14 +365,48 @@ public class ImpParser extends Parser {
 				com(0);
 				setState(17);
 				match(RBRACE);
-				setState(18);
-				match(ELSE);
-				setState(19);
-				match(LBRACE);
-				setState(20);
-				com(0);
-				setState(21);
-				match(RBRACE);
+				setState(36);
+				_errHandler.sync(this);
+				switch ( getInterpreter().adaptivePredict(_input,1,_ctx) ) {
+				case 1:
+					{
+					setState(28);
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+					while (_la==ELSEIF) {
+						{
+						{
+						setState(18);
+						match(ELSEIF);
+						setState(19);
+						match(LPAR);
+						setState(20);
+						exp(0);
+						setState(21);
+						match(RPAR);
+						setState(22);
+						match(LBRACE);
+						setState(23);
+						com(0);
+						setState(24);
+						match(RBRACE);
+						}
+						}
+						setState(30);
+						_errHandler.sync(this);
+						_la = _input.LA(1);
+					}
+					setState(31);
+					match(ELSE);
+					setState(32);
+					match(LBRACE);
+					setState(33);
+					com(0);
+					setState(34);
+					match(RBRACE);
+					}
+					break;
+				}
 				}
 				break;
 			case ID:
@@ -303,11 +414,11 @@ public class ImpParser extends Parser {
 				_localctx = new AssignContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(23);
+				setState(38);
 				match(ID);
-				setState(24);
+				setState(39);
 				match(ASSIGN);
-				setState(25);
+				setState(40);
 				exp(0);
 				}
 				break;
@@ -316,7 +427,7 @@ public class ImpParser extends Parser {
 				_localctx = new SkipContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(26);
+				setState(41);
 				match(SKIPP);
 				}
 				break;
@@ -325,19 +436,19 @@ public class ImpParser extends Parser {
 				_localctx = new WhileContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(27);
+				setState(42);
 				match(WHILE);
-				setState(28);
+				setState(43);
 				match(LPAR);
-				setState(29);
+				setState(44);
 				exp(0);
-				setState(30);
+				setState(45);
 				match(RPAR);
-				setState(31);
+				setState(46);
 				match(LBRACE);
-				setState(32);
+				setState(47);
 				com(0);
-				setState(33);
+				setState(48);
 				match(RBRACE);
 				}
 				break;
@@ -346,13 +457,84 @@ public class ImpParser extends Parser {
 				_localctx = new OutContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(35);
+				setState(50);
 				match(OUT);
-				setState(36);
+				setState(51);
 				match(LPAR);
-				setState(37);
+				setState(52);
 				exp(0);
-				setState(38);
+				setState(53);
+				match(RPAR);
+				}
+				break;
+			case FOR:
+				{
+				_localctx = new ForContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+				setState(55);
+				match(FOR);
+				setState(56);
+				match(LPAR);
+				setState(57);
+				com(0);
+				setState(58);
+				match(SEMICOLON);
+				setState(59);
+				exp(0);
+				setState(60);
+				match(SEMICOLON);
+				setState(61);
+				com(0);
+				setState(62);
+				match(RPAR);
+				setState(63);
+				match(LBRACE);
+				setState(64);
+				com(0);
+				setState(65);
+				match(RBRACE);
+				}
+				break;
+			case DO:
+				{
+				_localctx = new DoWhileContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+				setState(67);
+				match(DO);
+				setState(68);
+				match(LBRACE);
+				setState(69);
+				com(0);
+				setState(70);
+				match(RBRACE);
+				setState(71);
+				match(WHILE);
+				setState(72);
+				match(LPAR);
+				setState(73);
+				exp(0);
+				setState(74);
+				match(RPAR);
+				}
+				break;
+			case ND:
+				{
+				_localctx = new NdContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+				setState(76);
+				match(ND);
+				setState(77);
+				match(LPAR);
+				setState(78);
+				com(0);
+				setState(79);
+				match(T__0);
+				setState(80);
+				com(0);
+				setState(81);
 				match(RPAR);
 				}
 				break;
@@ -360,9 +542,9 @@ public class ImpParser extends Parser {
 				throw new NoViableAltException(this);
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(47);
+			setState(90);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,1,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,3,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
@@ -371,18 +553,18 @@ public class ImpParser extends Parser {
 					{
 					_localctx = new SeqContext(new ComContext(_parentctx, _parentState));
 					pushNewRecursionContext(_localctx, _startState, RULE_com);
-					setState(42);
-					if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
-					setState(43);
+					setState(85);
+					if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
+					setState(86);
 					match(SEMICOLON);
-					setState(44);
-					com(4);
+					setState(87);
+					com(7);
 					}
 					} 
 				}
-				setState(49);
+				setState(92);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,1,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,3,_ctx);
 			}
 			}
 		}
@@ -580,7 +762,7 @@ public class ImpParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(60);
+			setState(103);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case NAT:
@@ -589,7 +771,7 @@ public class ImpParser extends Parser {
 				_ctx = _localctx;
 				_prevctx = _localctx;
 
-				setState(51);
+				setState(94);
 				match(NAT);
 				}
 				break;
@@ -598,7 +780,7 @@ public class ImpParser extends Parser {
 				_localctx = new BoolContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(52);
+				setState(95);
 				match(BOOL);
 				}
 				break;
@@ -607,11 +789,11 @@ public class ImpParser extends Parser {
 				_localctx = new ParExpContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(53);
+				setState(96);
 				match(LPAR);
-				setState(54);
+				setState(97);
 				exp(0);
-				setState(55);
+				setState(98);
 				match(RPAR);
 				}
 				break;
@@ -620,9 +802,9 @@ public class ImpParser extends Parser {
 				_localctx = new NotContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(57);
+				setState(100);
 				match(NOT);
-				setState(58);
+				setState(101);
 				exp(7);
 				}
 				break;
@@ -631,7 +813,7 @@ public class ImpParser extends Parser {
 				_localctx = new IdContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(59);
+				setState(102);
 				match(ID);
 				}
 				break;
@@ -639,26 +821,26 @@ public class ImpParser extends Parser {
 				throw new NoViableAltException(this);
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(82);
+			setState(125);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,4,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,6,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(80);
+					setState(123);
 					_errHandler.sync(this);
-					switch ( getInterpreter().adaptivePredict(_input,3,_ctx) ) {
+					switch ( getInterpreter().adaptivePredict(_input,5,_ctx) ) {
 					case 1:
 						{
 						_localctx = new PowContext(new ExpContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_exp);
-						setState(62);
+						setState(105);
 						if (!(precpred(_ctx, 8))) throw new FailedPredicateException(this, "precpred(_ctx, 8)");
-						setState(63);
+						setState(106);
 						match(POW);
-						setState(64);
+						setState(107);
 						exp(8);
 						}
 						break;
@@ -666,9 +848,9 @@ public class ImpParser extends Parser {
 						{
 						_localctx = new DivMulModContext(new ExpContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_exp);
-						setState(65);
+						setState(108);
 						if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
-						setState(66);
+						setState(109);
 						((DivMulModContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << MUL) | (1L << DIV) | (1L << MOD))) != 0)) ) {
@@ -679,7 +861,7 @@ public class ImpParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(67);
+						setState(110);
 						exp(7);
 						}
 						break;
@@ -687,9 +869,9 @@ public class ImpParser extends Parser {
 						{
 						_localctx = new PlusMinusContext(new ExpContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_exp);
-						setState(68);
+						setState(111);
 						if (!(precpred(_ctx, 5))) throw new FailedPredicateException(this, "precpred(_ctx, 5)");
-						setState(69);
+						setState(112);
 						((PlusMinusContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !(_la==PLUS || _la==MINUS) ) {
@@ -700,7 +882,7 @@ public class ImpParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(70);
+						setState(113);
 						exp(6);
 						}
 						break;
@@ -708,9 +890,9 @@ public class ImpParser extends Parser {
 						{
 						_localctx = new CmpExpContext(new ExpContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_exp);
-						setState(71);
+						setState(114);
 						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
-						setState(72);
+						setState(115);
 						((CmpExpContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << LEQ) | (1L << GEQ) | (1L << LT) | (1L << GT))) != 0)) ) {
@@ -721,7 +903,7 @@ public class ImpParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(73);
+						setState(116);
 						exp(5);
 						}
 						break;
@@ -729,9 +911,9 @@ public class ImpParser extends Parser {
 						{
 						_localctx = new EqExpContext(new ExpContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_exp);
-						setState(74);
+						setState(117);
 						if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
-						setState(75);
+						setState(118);
 						((EqExpContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !(_la==EQQ || _la==NEQ) ) {
@@ -742,7 +924,7 @@ public class ImpParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(76);
+						setState(119);
 						exp(4);
 						}
 						break;
@@ -750,9 +932,9 @@ public class ImpParser extends Parser {
 						{
 						_localctx = new LogicExpContext(new ExpContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_exp);
-						setState(77);
+						setState(120);
 						if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
-						setState(78);
+						setState(121);
 						((LogicExpContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !(_la==AND || _la==OR) ) {
@@ -763,16 +945,16 @@ public class ImpParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(79);
+						setState(122);
 						exp(3);
 						}
 						break;
 					}
 					} 
 				}
-				setState(84);
+				setState(127);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,4,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,6,_ctx);
 			}
 			}
 		}
@@ -799,7 +981,7 @@ public class ImpParser extends Parser {
 	private boolean com_sempred(ComContext _localctx, int predIndex) {
 		switch (predIndex) {
 		case 0:
-			return precpred(_ctx, 3);
+			return precpred(_ctx, 6);
 		}
 		return true;
 	}
@@ -822,30 +1004,39 @@ public class ImpParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3!X\4\2\t\2\4\3\t\3"+
-		"\4\4\t\4\3\2\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3&\u0083\4\2\t\2\4"+
+		"\3\t\3\4\4\t\4\3\2\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3"+
+		"\3\3\3\3\3\3\3\3\3\3\3\3\7\3\35\n\3\f\3\16\3 \13\3\3\3\3\3\3\3\3\3\3\3"+
+		"\5\3\'\n\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3"+
 		"\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3"+
-		"\3\3\5\3+\n\3\3\3\3\3\3\3\7\3\60\n\3\f\3\16\3\63\13\3\3\4\3\4\3\4\3\4"+
-		"\3\4\3\4\3\4\3\4\3\4\3\4\5\4?\n\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4"+
-		"\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\7\4S\n\4\f\4\16\4V\13\4\3\4\2\4\4"+
-		"\6\5\2\4\6\2\7\3\2\7\t\3\2\5\6\3\2\17\22\3\2\r\16\3\2\13\f\2c\2\b\3\2"+
-		"\2\2\4*\3\2\2\2\6>\3\2\2\2\b\t\5\4\3\2\t\n\7\2\2\3\n\3\3\2\2\2\13\f\b"+
-		"\3\1\2\f\r\7\24\2\2\r\16\7\33\2\2\16\17\5\6\4\2\17\20\7\34\2\2\20\21\7"+
-		"\25\2\2\21\22\7\35\2\2\22\23\5\4\3\2\23\24\7\36\2\2\24\25\7\26\2\2\25"+
-		"\26\7\35\2\2\26\27\5\4\3\2\27\30\7\36\2\2\30+\3\2\2\2\31\32\7 \2\2\32"+
-		"\33\7\31\2\2\33+\5\6\4\2\34+\7\30\2\2\35\36\7\27\2\2\36\37\7\33\2\2\37"+
-		" \5\6\4\2 !\7\34\2\2!\"\7\35\2\2\"#\5\4\3\2#$\7\36\2\2$+\3\2\2\2%&\7\32"+
-		"\2\2&\'\7\33\2\2\'(\5\6\4\2()\7\34\2\2)+\3\2\2\2*\13\3\2\2\2*\31\3\2\2"+
-		"\2*\34\3\2\2\2*\35\3\2\2\2*%\3\2\2\2+\61\3\2\2\2,-\f\5\2\2-.\7\37\2\2"+
-		".\60\5\4\3\6/,\3\2\2\2\60\63\3\2\2\2\61/\3\2\2\2\61\62\3\2\2\2\62\5\3"+
-		"\2\2\2\63\61\3\2\2\2\64\65\b\4\1\2\65?\7\3\2\2\66?\7\4\2\2\678\7\33\2"+
-		"\289\5\6\4\29:\7\34\2\2:?\3\2\2\2;<\7\23\2\2<?\5\6\4\t=?\7 \2\2>\64\3"+
-		"\2\2\2>\66\3\2\2\2>\67\3\2\2\2>;\3\2\2\2>=\3\2\2\2?T\3\2\2\2@A\f\n\2\2"+
-		"AB\7\n\2\2BS\5\6\4\nCD\f\b\2\2DE\t\2\2\2ES\5\6\4\tFG\f\7\2\2GH\t\3\2\2"+
-		"HS\5\6\4\bIJ\f\6\2\2JK\t\4\2\2KS\5\6\4\7LM\f\5\2\2MN\t\5\2\2NS\5\6\4\6"+
-		"OP\f\4\2\2PQ\t\6\2\2QS\5\6\4\5R@\3\2\2\2RC\3\2\2\2RF\3\2\2\2RI\3\2\2\2"+
-		"RL\3\2\2\2RO\3\2\2\2SV\3\2\2\2TR\3\2\2\2TU\3\2\2\2U\7\3\2\2\2VT\3\2\2"+
-		"\2\7*\61>RT";
+		"\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\5\3V\n\3\3\3\3\3\3"+
+		"\3\7\3[\n\3\f\3\16\3^\13\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\5\4"+
+		"j\n\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4"+
+		"\3\4\3\4\7\4~\n\4\f\4\16\4\u0081\13\4\3\4\2\4\4\6\5\2\4\6\2\7\3\2\b\n"+
+		"\3\2\6\7\3\2\20\23\3\2\16\17\3\2\f\r\2\u0093\2\b\3\2\2\2\4U\3\2\2\2\6"+
+		"i\3\2\2\2\b\t\5\4\3\2\t\n\7\2\2\3\n\3\3\2\2\2\13\f\b\3\1\2\f\r\7\25\2"+
+		"\2\r\16\7 \2\2\16\17\5\6\4\2\17\20\7!\2\2\20\21\7\26\2\2\21\22\7\"\2\2"+
+		"\22\23\5\4\3\2\23&\7#\2\2\24\25\7\36\2\2\25\26\7 \2\2\26\27\5\6\4\2\27"+
+		"\30\7!\2\2\30\31\7\"\2\2\31\32\5\4\3\2\32\33\7#\2\2\33\35\3\2\2\2\34\24"+
+		"\3\2\2\2\35 \3\2\2\2\36\34\3\2\2\2\36\37\3\2\2\2\37!\3\2\2\2 \36\3\2\2"+
+		"\2!\"\7\27\2\2\"#\7\"\2\2#$\5\4\3\2$%\7#\2\2%\'\3\2\2\2&\36\3\2\2\2&\'"+
+		"\3\2\2\2\'V\3\2\2\2()\7%\2\2)*\7\32\2\2*V\5\6\4\2+V\7\31\2\2,-\7\30\2"+
+		"\2-.\7 \2\2./\5\6\4\2/\60\7!\2\2\60\61\7\"\2\2\61\62\5\4\3\2\62\63\7#"+
+		"\2\2\63V\3\2\2\2\64\65\7\33\2\2\65\66\7 \2\2\66\67\5\6\4\2\678\7!\2\2"+
+		"8V\3\2\2\29:\7\34\2\2:;\7 \2\2;<\5\4\3\2<=\7$\2\2=>\5\6\4\2>?\7$\2\2?"+
+		"@\5\4\3\2@A\7!\2\2AB\7\"\2\2BC\5\4\3\2CD\7#\2\2DV\3\2\2\2EF\7\35\2\2F"+
+		"G\7\"\2\2GH\5\4\3\2HI\7#\2\2IJ\7\30\2\2JK\7 \2\2KL\5\6\4\2LM\7!\2\2MV"+
+		"\3\2\2\2NO\7\37\2\2OP\7 \2\2PQ\5\4\3\2QR\7\3\2\2RS\5\4\3\2ST\7!\2\2TV"+
+		"\3\2\2\2U\13\3\2\2\2U(\3\2\2\2U+\3\2\2\2U,\3\2\2\2U\64\3\2\2\2U9\3\2\2"+
+		"\2UE\3\2\2\2UN\3\2\2\2V\\\3\2\2\2WX\f\b\2\2XY\7$\2\2Y[\5\4\3\tZW\3\2\2"+
+		"\2[^\3\2\2\2\\Z\3\2\2\2\\]\3\2\2\2]\5\3\2\2\2^\\\3\2\2\2_`\b\4\1\2`j\7"+
+		"\4\2\2aj\7\5\2\2bc\7 \2\2cd\5\6\4\2de\7!\2\2ej\3\2\2\2fg\7\24\2\2gj\5"+
+		"\6\4\thj\7%\2\2i_\3\2\2\2ia\3\2\2\2ib\3\2\2\2if\3\2\2\2ih\3\2\2\2j\177"+
+		"\3\2\2\2kl\f\n\2\2lm\7\13\2\2m~\5\6\4\nno\f\b\2\2op\t\2\2\2p~\5\6\4\t"+
+		"qr\f\7\2\2rs\t\3\2\2s~\5\6\4\btu\f\6\2\2uv\t\4\2\2v~\5\6\4\7wx\f\5\2\2"+
+		"xy\t\5\2\2y~\5\6\4\6z{\f\4\2\2{|\t\6\2\2|~\5\6\4\5}k\3\2\2\2}n\3\2\2\2"+
+		"}q\3\2\2\2}t\3\2\2\2}w\3\2\2\2}z\3\2\2\2~\u0081\3\2\2\2\177}\3\2\2\2\177"+
+		"\u0080\3\2\2\2\u0080\7\3\2\2\2\u0081\177\3\2\2\2\t\36&U\\i}\177";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
