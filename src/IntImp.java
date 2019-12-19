@@ -20,11 +20,16 @@ public class IntImp extends ImpBaseVisitor<Value> {
 
     // ---------- COMMANDS ----------
 
-    // TODO if-elseif-else
-    /*@Override
+    @Override
     public ComValue visitIf(ImpParser.IfContext ctx) {
-        return visitBoolExp(ctx.exp()) ? visitCom(ctx.com(0)) : visitCom(ctx.com(1));
-    }*/
+        for (int i = 0; i < ctx.exp().size(); i++) {
+            if (visitBoolExp(ctx.exp(i))) {
+                return visitCom(ctx.com(i));
+            }
+        }
+
+        return ComValue.INSTANCE;
+    }
 
     @Override
     public ComValue visitAssign(ImpParser.AssignContext ctx) {
