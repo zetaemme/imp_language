@@ -1,5 +1,7 @@
 import value.*;
 
+import java.util.Random;
+
 public class IntImp extends ImpBaseVisitor<Value> {
 
     private final Conf conf;
@@ -53,7 +55,7 @@ public class IntImp extends ImpBaseVisitor<Value> {
 
     @Override
     public ComValue visitWhile(ImpParser.WhileContext ctx) {
-        if (!visitBoolExp(ctx.exp())) {
+        if(!visitBoolExp(ctx.exp())) {
             return ComValue.INSTANCE;
         }
 
@@ -69,7 +71,33 @@ public class IntImp extends ImpBaseVisitor<Value> {
         return ComValue.INSTANCE;
     }
 
-    // TODO for, doWhile, nd
+    // TODO for, doWhile
+    @Override
+    public ComValue visitFor(ImpParser.ForContext ctx) {
+        // Non fa un cazzo parte 3 MANNAGGIA AL CLERO
+        visitAssign((ImpParser.AssignContext) ctx.com(0));
+
+        /*if(!visitBoolExp(ctx.exp())) {
+            return ComValue.INSTANCE;
+        }
+
+        visitCom(ctx.com(2));
+        visitCom(ctx.com(1));
+
+        return visitCom(ctx);*/
+
+        return null;
+    }
+
+    @Override
+    public ComValue visitNd(ImpParser.NdContext ctx) {
+        Random random = new Random();
+        if(random.nextInt() % 2 == 0) {
+            return visitCom(ctx.com(0));
+        } else {
+            return visitCom(ctx.com(1));
+        }
+    }
 
     // ---------------------------------
 
