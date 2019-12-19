@@ -71,27 +71,28 @@ public class IntImp extends ImpBaseVisitor<Value> {
         return ComValue.INSTANCE;
     }
 
-    // TODO for, doWhile
     @Override
     public ComValue visitFor(ImpParser.ForContext ctx) {
-        // Non fa un cazzo parte 3 MANNAGGIA AL CLERO
         visitAssign((ImpParser.AssignContext) ctx.com(0));
 
-        /*if(!visitBoolExp(ctx.exp())) {
-            return ComValue.INSTANCE;
+        while(!visitBoolExp(ctx.exp())) {
+            visitCom(ctx.com(2));
+            visitCom(ctx.com(1));
         }
 
-        visitCom(ctx.com(2));
-        visitCom(ctx.com(1));
-
-        return visitCom(ctx);*/
-
-        return null;
+        return ComValue.INSTANCE;
     }
+
+    // TODO doWhile
+    /*@Override
+    public Value visitDoWhile(ImpParser.DoWhileContext ctx) {
+
+    }*/
 
     @Override
     public ComValue visitNd(ImpParser.NdContext ctx) {
         Random random = new Random();
+
         if(random.nextInt() % 2 == 0) {
             return visitCom(ctx.com(0));
         } else {
