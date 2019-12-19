@@ -1,5 +1,7 @@
 import value.*;
 
+import java.util.Random;
+
 public class IntImp extends ImpBaseVisitor<Value> {
 
     private final Conf conf;
@@ -20,11 +22,16 @@ public class IntImp extends ImpBaseVisitor<Value> {
 
     // ---------- COMMANDS ----------
 
-    // TODO if-elseif-else
-    /*@Override
+    @Override
     public ComValue visitIf(ImpParser.IfContext ctx) {
-        return visitBoolExp(ctx.exp()) ? visitCom(ctx.com(0)) : visitCom(ctx.com(1));
-    }*/
+        for (int i = 0; i < ctx.exp().size(); i++) {
+            if (visitBoolExp(ctx.exp(i))) {
+                return visitCom(ctx.com(i));
+            }
+        }
+
+        return ComValue.INSTANCE;
+    }
 
     @Override
     public ComValue visitAssign(ImpParser.AssignContext ctx) {
@@ -48,7 +55,7 @@ public class IntImp extends ImpBaseVisitor<Value> {
 
     @Override
     public ComValue visitWhile(ImpParser.WhileContext ctx) {
-        if (!visitBoolExp(ctx.exp())) {
+        if(!visitBoolExp(ctx.exp())) {
             return ComValue.INSTANCE;
         }
 
@@ -64,7 +71,34 @@ public class IntImp extends ImpBaseVisitor<Value> {
         return ComValue.INSTANCE;
     }
 
-    // TODO for, doWhile, nd
+    @Override
+    public ComValue visitFor(ImpParser.ForContext ctx) {
+        visitAssign((ImpParser.AssignContext) ctx.com(0));
+
+        while(!visitBoolExp(ctx.exp())) {
+            visitCom(ctx.com(2));
+            visitCom(ctx.com(1));
+        }
+
+        return ComValue.INSTANCE;
+    }
+
+    // TODO doWhile
+    /*@Override
+    public Value visitDoWhile(ImpParser.DoWhileContext ctx) {
+
+    }*/
+
+    @Override
+    public ComValue visitNd(ImpParser.NdContext ctx) {
+        Random random = new Random();
+
+        if(random.nextInt() % 2 == 0) {
+            return visitCom(ctx.com(0));
+        } else {
+            return visitCom(ctx.com(1));
+        }
+    }
 
     // ---------------------------------
 
