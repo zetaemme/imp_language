@@ -10,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        InputStream inputStream = classLoader.getResourceAsStream("test");
+        InputStream inputStream = classLoader.getResourceAsStream(args[0]);
         CharStream charStream = CharStreams.fromStream(inputStream);
 
         ImpLexer lexer = new ImpLexer(charStream);

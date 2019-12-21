@@ -83,11 +83,16 @@ public class IntImp extends ImpBaseVisitor<Value> {
         return ComValue.INSTANCE;
     }
 
-    // TODO doWhile
-    /*@Override
-    public Value visitDoWhile(ImpParser.DoWhileContext ctx) {
+    @Override
+    public ComValue visitDoWhile(ImpParser.DoWhileContext ctx) {
+        visitCom(ctx.com());
 
-    }*/
+        while(!visitBoolExp(ctx.exp())) {
+            visitCom(ctx.com());
+        }
+
+        return ComValue.INSTANCE;
+    }
 
     @Override
     public ComValue visitNd(ImpParser.NdContext ctx) {
