@@ -1,4 +1,0 @@
-n = 3;
-for (n = true; n; skip) {
-    out(n)
-}
