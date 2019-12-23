@@ -30,3 +30,6 @@ hs_err_pid*
 .idea/modules.xml
 .idea/vcs.xml
 imp_language.iml
+
+# out
+/out/
