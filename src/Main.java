@@ -10,7 +10,13 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        InputStream inputStream = classLoader.getResourceAsStream(args[0]);
+        /* TODO Problema con:
+                BAD:
+                    bad-for2
+                WELL:
+                    (forse) factorial, (forse) good-for, good-if, (forse) if-then-elseif
+        */
+        InputStream inputStream = classLoader.getResourceAsStream("test/well/if-then-elseif");
         CharStream charStream = CharStreams.fromStream(inputStream);
 
         ImpLexer lexer = new ImpLexer(charStream);
