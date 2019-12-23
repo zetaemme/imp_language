@@ -1,5 +1,0 @@
-n = 0;
-for (n = true; n; skip) {
-    out(n);
-    n = 0
-}
