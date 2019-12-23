@@ -202,7 +202,7 @@ public class IntImp extends ImpBaseVisitor<Value> {
     public ComValue visitFor(ImpParser.ForContext ctx) {
         visitAssign((ImpParser.AssignContext) ctx.com(0));
 
-        while(!visitBoolExp(ctx.exp())) {
+        while(visitBoolExp(ctx.exp())) {
             visitCom(ctx.com(2));
             visitCom(ctx.com(1));
         }

@@ -2,8 +2,7 @@ n = 10;
 
 if (n <= 1) then {
     out(n)
-}
-else {
+} else {
     fib = 1;
     prev = 1;
 

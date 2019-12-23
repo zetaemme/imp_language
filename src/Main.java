@@ -10,8 +10,8 @@ public class Main {
 
     public static void main(String args[]) throws IOException {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        // TODO: Probemi con factorial e bad-for2
-        InputStream inputStream = classLoader.getResourceAsStream("test/well/factorial");
+        // TODO: fib
+        InputStream inputStream = classLoader.getResourceAsStream("test/well/fib");
         CharStream charStream = CharStreams.fromStream(inputStream);
 
         ImpLexer lexer = new ImpLexer(charStream);
