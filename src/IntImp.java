@@ -1,5 +1,7 @@
 import value.*;
 
+import java.util.Random;
+
 public class IntImp extends ImpBaseVisitor<Value> {
 
     private final Conf conf;
@@ -58,14 +60,8 @@ public class IntImp extends ImpBaseVisitor<Value> {
     }
 
     @Override
-    public ComValue visitIf(ImpParser.IfContext ctx) {
-        return visitBoolExp(ctx.exp()) ? visitCom(ctx.com(0)) : visitCom(ctx.com(1));
-    }
-
-    @Override
     public ComValue visitAssign(ImpParser.AssignContext ctx) {
         conf.put(ctx.ID().getText(), visitExp(ctx.exp()));
-
         return ComValue.INSTANCE;
     }
 
@@ -78,25 +74,21 @@ public class IntImp extends ImpBaseVisitor<Value> {
     public ComValue visitSeq(ImpParser.SeqContext ctx) {
         visitCom(ctx.com(0));
         visitCom(ctx.com(1));
-
         return ComValue.INSTANCE;
     }
 
     @Override
     public ComValue visitWhile(ImpParser.WhileContext ctx) {
-        if (!visitBoolExp(ctx.exp())) {
+        if (!visitBoolExp(ctx.exp()))
             return ComValue.INSTANCE;
-        }
 
         visitCom(ctx.com());
-
         return visitCom(ctx);
     }
 
     @Override
     public ComValue visitOut(ImpParser.OutContext ctx) {
         System.out.println(visitExp(ctx.exp()));
-
         return ComValue.INSTANCE;
     }
 
@@ -133,15 +125,13 @@ public class IntImp extends ImpBaseVisitor<Value> {
         int left = visitNatExp(ctx.exp(0));
         int right = visitNatExp(ctx.exp(1));
 
-        NaturalValue result = null;
-
         switch (ctx.op.getType()) {
-            case ImpParser.DIV : result = new NaturalValue(left / right);
-            case ImpParser.MUL : result = new NaturalValue(left * right);
-            case ImpParser.MOD : result = new NaturalValue(left % right);
+            case ImpParser.DIV : return new NaturalValue(left / right);
+            case ImpParser.MUL : return new NaturalValue(left * right);
+            case ImpParser.MOD : return new NaturalValue(left % right);
         }
 
-        return result; // dumb return (non-reachable code)
+        return null; // dumb return (non-reachable code)
     }
 
     @Override
@@ -149,15 +139,12 @@ public class IntImp extends ImpBaseVisitor<Value> {
         int left = visitNatExp(ctx.exp(0));
         int right = visitNatExp(ctx.exp(1));
 
-        NaturalValue result = null;
-
-        if(ctx.op.getType() == ImpParser.PLUS) {
-            result = new NaturalValue(left + right);
-        } else if(ctx.op.getType() == ImpParser.MINUS) {
-            result = new NaturalValue(Math.max(left - right, 0));
+        switch (ctx.op.getType()) {
+            case ImpParser.PLUS  : return new NaturalValue(left + right);
+            case ImpParser.MINUS : return new NaturalValue(Math.max(left - right, 0));
         }
 
-        return result; // dumb return (non-reachable code)
+        return null; // dumb return (non-reachable code)
     }
 
     @Override
@@ -165,16 +152,14 @@ public class IntImp extends ImpBaseVisitor<Value> {
         int left = visitNatExp(ctx.exp(0));
         int right = visitNatExp(ctx.exp(1));
 
-        BooleanValue result = null;
-
         switch (ctx.op.getType()) {
-            case ImpParser.GEQ : result = new BooleanValue(left >= right);
-            case ImpParser.LEQ : result = new BooleanValue(left <= right);
-            case ImpParser.LT  : result = new BooleanValue(left < right);
-            case ImpParser.GT  : result = new BooleanValue(left > right);
+            case ImpParser.GEQ : return new BooleanValue(left >= right);
+            case ImpParser.LEQ : return new BooleanValue(left <= right);
+            case ImpParser.LT  : return new BooleanValue(left < right);
+            case ImpParser.GT  : return new BooleanValue(left > right);
         }
 
-        return result; // dumb return (non-reachable code)
+        return null; // dumb return (non-reachable code)
     }
 
     @Override
@@ -182,15 +167,12 @@ public class IntImp extends ImpBaseVisitor<Value> {
         ExpValue<?> left = visitExp(ctx.exp(0));
         ExpValue<?> right = visitExp(ctx.exp(1));
 
-        BooleanValue result = null;
-
-        if(ctx.op.getType() == ImpParser.EQQ) {
-            result = new BooleanValue(left.equals(right));
-        } else if(ctx.op.getType() == ImpParser.NEQ) {
-            result = new BooleanValue(!left.equals(right));
+        switch (ctx.op.getType()) {
+            case ImpParser.EQQ : return new BooleanValue(left.equals(right));
+            case ImpParser.NEQ : return new BooleanValue(!left.equals(right));
         }
 
-        return result; // dumb return (non-reachable code)
+        return null; // dumb return (non-reachable code)
     }
 
     @Override
@@ -198,15 +180,12 @@ public class IntImp extends ImpBaseVisitor<Value> {
         boolean left = visitBoolExp(ctx.exp(0));
         boolean right = visitBoolExp(ctx.exp(1));
 
-        BooleanValue result = null;
-
-        if(ctx.op.getType() == ImpParser.AND) {
-            result = new BooleanValue(left && right);
-        } else if(ctx.op.getType() == ImpParser.OR) {
-            result = new BooleanValue(left || right);
+        switch (ctx.op.getType()) {
+            case ImpParser.AND : return new BooleanValue(left && right);
+            case ImpParser.OR  : return new BooleanValue(left || right);
         }
 
-        return result; // dumb return (non-reachable code)
+        return null; // dumb return (non-reachable code)
     }
 
     @Override
@@ -217,5 +196,50 @@ public class IntImp extends ImpBaseVisitor<Value> {
         }
 
         return conf.get(ctx.ID().getText());
+    }
+
+    @Override
+    public ComValue visitFor(ImpParser.ForContext ctx) {
+        visitAssign((ImpParser.AssignContext) ctx.com(0));
+
+        while(visitBoolExp(ctx.exp())) {
+            visitCom(ctx.com(2));
+            visitCom(ctx.com(1));
+        }
+
+        return ComValue.INSTANCE;
+    }
+
+    @Override
+    public ComValue visitDoWhile(ImpParser.DoWhileContext ctx) {
+        visitCom(ctx.com());
+
+        while(!visitBoolExp(ctx.exp())) {
+            visitCom(ctx.com());
+        }
+
+        return ComValue.INSTANCE;
+    }
+
+    @Override
+    public ComValue visitNd(ImpParser.NdContext ctx) {
+        Random random = new Random();
+
+        if(random.nextInt() % 2 == 0) {
+            return visitCom(ctx.com(0));
+        } else {
+            return visitCom(ctx.com(1));
+        }
+    }
+
+    @Override
+    public ComValue visitIf(ImpParser.IfContext ctx) {
+        for (int i = 0; i < ctx.exp().size(); i++) {
+            if (visitBoolExp(ctx.exp(i))) {
+                return visitCom(ctx.com(i));
+            }
+        }
+
+        return ComValue.INSTANCE;
     }
 }

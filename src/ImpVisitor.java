@@ -1,4 +1,4 @@
-// Generated from /home/samuele/Desktop/lab04/ex/imp/src/Imp.g4 by ANTLR 4.7.2
+// Generated from /home/mattiazorzan/IdeaProjects/imp_language/src/Imp.g4 by ANTLR 4.7.2
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -15,6 +15,27 @@ public interface ImpVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitProg(ImpParser.ProgContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code doWhile}
+	 * labeled alternative in {@link ImpParser#com}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDoWhile(ImpParser.DoWhileContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code nd}
+	 * labeled alternative in {@link ImpParser#com}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNd(ImpParser.NdContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code for}
+	 * labeled alternative in {@link ImpParser#com}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFor(ImpParser.ForContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code skip}
 	 * labeled alternative in {@link ImpParser#com}.
