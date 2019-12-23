@@ -18,7 +18,7 @@ public class ImpLexer extends Lexer {
 	public static final int
 		T__0=1, NAT=2, BOOL=3, PLUS=4, MINUS=5, MUL=6, DIV=7, MOD=8, POW=9, AND=10, 
 		OR=11, EQQ=12, NEQ=13, LEQ=14, GEQ=15, LT=16, GT=17, NOT=18, IF=19, THEN=20, 
-		ELSE=21, WHILE=22, SKIPP=23, ASSIGN=24, OUT=25, FOR=26, DO=27, ELSEIF=28, 
+		ELSE=21, WHILE=22, SKIPP=23, ASSIGN=24, OUT=25, ELSEIF=26, DO=27, FOR=28, 
 		ND=29, LPAR=30, RPAR=31, LBRACE=32, RBRACE=33, SEMICOLON=34, ID=35, WS=36;
 	public static String[] channelNames = {
 		"DEFAULT_TOKEN_CHANNEL", "HIDDEN"
@@ -32,7 +32,7 @@ public class ImpLexer extends Lexer {
 		return new String[] {
 			"T__0", "NAT", "BOOL", "PLUS", "MINUS", "MUL", "DIV", "MOD", "POW", "AND", 
 			"OR", "EQQ", "NEQ", "LEQ", "GEQ", "LT", "GT", "NOT", "IF", "THEN", "ELSE", 
-			"WHILE", "SKIPP", "ASSIGN", "OUT", "FOR", "DO", "ELSEIF", "ND", "LPAR", 
+			"WHILE", "SKIPP", "ASSIGN", "OUT", "ELSEIF", "DO", "FOR", "ND", "LPAR", 
 			"RPAR", "LBRACE", "RBRACE", "SEMICOLON", "ID", "WS"
 		};
 	}
@@ -42,8 +42,8 @@ public class ImpLexer extends Lexer {
 		return new String[] {
 			null, "','", null, null, "'+'", "'-'", "'*'", "'/'", "'mod'", "'^'", 
 			"'&'", "'|'", "'=='", "'!='", "'<='", "'>='", "'<'", "'>'", "'!'", "'if'", 
-			"'then'", "'else'", "'while'", "'skip'", "'='", "'out'", "'for'", "'do'", 
-			"'elseif'", "'nd'", "'('", "')'", "'{'", "'}'", "';'"
+			"'then'", "'else'", "'while'", "'skip'", "'='", "'out'", "'elseif'", 
+			"'do'", "'for'", "'nd'", "'('", "')'", "'{'", "'}'", "';'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -51,7 +51,7 @@ public class ImpLexer extends Lexer {
 		return new String[] {
 			null, null, "NAT", "BOOL", "PLUS", "MINUS", "MUL", "DIV", "MOD", "POW", 
 			"AND", "OR", "EQQ", "NEQ", "LEQ", "GEQ", "LT", "GT", "NOT", "IF", "THEN", 
-			"ELSE", "WHILE", "SKIPP", "ASSIGN", "OUT", "FOR", "DO", "ELSEIF", "ND", 
+			"ELSE", "WHILE", "SKIPP", "ASSIGN", "OUT", "ELSEIF", "DO", "FOR", "ND", 
 			"LPAR", "RPAR", "LBRACE", "RBRACE", "SEMICOLON", "ID", "WS"
 		};
 	}
@@ -125,7 +125,7 @@ public class ImpLexer extends Lexer {
 		"\r\3\16\3\16\3\16\3\17\3\17\3\17\3\20\3\20\3\20\3\21\3\21\3\22\3\22\3"+
 		"\23\3\23\3\24\3\24\3\24\3\25\3\25\3\25\3\25\3\25\3\26\3\26\3\26\3\26\3"+
 		"\26\3\27\3\27\3\27\3\27\3\27\3\27\3\30\3\30\3\30\3\30\3\30\3\31\3\31\3"+
-		"\32\3\32\3\32\3\32\3\33\3\33\3\33\3\33\3\34\3\34\3\34\3\35\3\35\3\35\3"+
+		"\32\3\32\3\32\3\32\3\33\3\33\3\33\3\33\3\33\3\33\3\33\3\34\3\34\3\34\3"+
 		"\35\3\35\3\35\3\35\3\36\3\36\3\36\3\37\3\37\3 \3 \3!\3!\3\"\3\"\3#\3#"+
 		"\3$\6$\u00c1\n$\r$\16$\u00c2\3%\6%\u00c6\n%\r%\16%\u00c7\3%\3%\2\2&\3"+
 		"\3\5\4\7\5\t\6\13\7\r\b\17\t\21\n\23\13\25\f\27\r\31\16\33\17\35\20\37"+
@@ -142,7 +142,7 @@ public class ImpLexer extends Lexer {
 		"\2\31t\3\2\2\2\33w\3\2\2\2\35z\3\2\2\2\37}\3\2\2\2!\u0080\3\2\2\2#\u0082"+
 		"\3\2\2\2%\u0084\3\2\2\2\'\u0086\3\2\2\2)\u0089\3\2\2\2+\u008e\3\2\2\2"+
 		"-\u0093\3\2\2\2/\u0099\3\2\2\2\61\u009e\3\2\2\2\63\u00a0\3\2\2\2\65\u00a4"+
-		"\3\2\2\2\67\u00a8\3\2\2\29\u00ab\3\2\2\2;\u00b2\3\2\2\2=\u00b5\3\2\2\2"+
+		"\3\2\2\2\67\u00ab\3\2\2\29\u00ae\3\2\2\2;\u00b2\3\2\2\2=\u00b5\3\2\2\2"+
 		"?\u00b7\3\2\2\2A\u00b9\3\2\2\2C\u00bb\3\2\2\2E\u00bd\3\2\2\2G\u00c0\3"+
 		"\2\2\2I\u00c5\3\2\2\2KL\7.\2\2L\4\3\2\2\2MV\7\62\2\2NR\t\2\2\2OQ\t\3\2"+
 		"\2PO\3\2\2\2QT\3\2\2\2RP\3\2\2\2RS\3\2\2\2SV\3\2\2\2TR\3\2\2\2UM\3\2\2"+
@@ -161,18 +161,18 @@ public class ImpLexer extends Lexer {
 		"\u0097\7n\2\2\u0097\u0098\7g\2\2\u0098.\3\2\2\2\u0099\u009a\7u\2\2\u009a"+
 		"\u009b\7m\2\2\u009b\u009c\7k\2\2\u009c\u009d\7r\2\2\u009d\60\3\2\2\2\u009e"+
 		"\u009f\7?\2\2\u009f\62\3\2\2\2\u00a0\u00a1\7q\2\2\u00a1\u00a2\7w\2\2\u00a2"+
-		"\u00a3\7v\2\2\u00a3\64\3\2\2\2\u00a4\u00a5\7h\2\2\u00a5\u00a6\7q\2\2\u00a6"+
-		"\u00a7\7t\2\2\u00a7\66\3\2\2\2\u00a8\u00a9\7f\2\2\u00a9\u00aa\7q\2\2\u00aa"+
-		"8\3\2\2\2\u00ab\u00ac\7g\2\2\u00ac\u00ad\7n\2\2\u00ad\u00ae\7u\2\2\u00ae"+
-		"\u00af\7g\2\2\u00af\u00b0\7k\2\2\u00b0\u00b1\7h\2\2\u00b1:\3\2\2\2\u00b2"+
-		"\u00b3\7p\2\2\u00b3\u00b4\7f\2\2\u00b4<\3\2\2\2\u00b5\u00b6\7*\2\2\u00b6"+
-		">\3\2\2\2\u00b7\u00b8\7+\2\2\u00b8@\3\2\2\2\u00b9\u00ba\7}\2\2\u00baB"+
-		"\3\2\2\2\u00bb\u00bc\7\177\2\2\u00bcD\3\2\2\2\u00bd\u00be\7=\2\2\u00be"+
-		"F\3\2\2\2\u00bf\u00c1\t\4\2\2\u00c0\u00bf\3\2\2\2\u00c1\u00c2\3\2\2\2"+
-		"\u00c2\u00c0\3\2\2\2\u00c2\u00c3\3\2\2\2\u00c3H\3\2\2\2\u00c4\u00c6\t"+
-		"\5\2\2\u00c5\u00c4\3\2\2\2\u00c6\u00c7\3\2\2\2\u00c7\u00c5\3\2\2\2\u00c7"+
-		"\u00c8\3\2\2\2\u00c8\u00c9\3\2\2\2\u00c9\u00ca\b%\2\2\u00caJ\3\2\2\2\b"+
-		"\2RU`\u00c2\u00c7\3\b\2\2";
+		"\u00a3\7v\2\2\u00a3\64\3\2\2\2\u00a4\u00a5\7g\2\2\u00a5\u00a6\7n\2\2\u00a6"+
+		"\u00a7\7u\2\2\u00a7\u00a8\7g\2\2\u00a8\u00a9\7k\2\2\u00a9\u00aa\7h\2\2"+
+		"\u00aa\66\3\2\2\2\u00ab\u00ac\7f\2\2\u00ac\u00ad\7q\2\2\u00ad8\3\2\2\2"+
+		"\u00ae\u00af\7h\2\2\u00af\u00b0\7q\2\2\u00b0\u00b1\7t\2\2\u00b1:\3\2\2"+
+		"\2\u00b2\u00b3\7p\2\2\u00b3\u00b4\7f\2\2\u00b4<\3\2\2\2\u00b5\u00b6\7"+
+		"*\2\2\u00b6>\3\2\2\2\u00b7\u00b8\7+\2\2\u00b8@\3\2\2\2\u00b9\u00ba\7}"+
+		"\2\2\u00baB\3\2\2\2\u00bb\u00bc\7\177\2\2\u00bcD\3\2\2\2\u00bd\u00be\7"+
+		"=\2\2\u00beF\3\2\2\2\u00bf\u00c1\t\4\2\2\u00c0\u00bf\3\2\2\2\u00c1\u00c2"+
+		"\3\2\2\2\u00c2\u00c0\3\2\2\2\u00c2\u00c3\3\2\2\2\u00c3H\3\2\2\2\u00c4"+
+		"\u00c6\t\5\2\2\u00c5\u00c4\3\2\2\2\u00c6\u00c7\3\2\2\2\u00c7\u00c5\3\2"+
+		"\2\2\u00c7\u00c8\3\2\2\2\u00c8\u00c9\3\2\2\2\u00c9\u00ca\b%\2\2\u00ca"+
+		"J\3\2\2\2\b\2RU`\u00c2\u00c7\3\b\2\2";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

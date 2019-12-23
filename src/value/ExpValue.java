@@ -20,15 +20,11 @@ public abstract class ExpValue<T> extends Value {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-        ExpValue<?> expValue = (ExpValue<?>) obj;
+        ExpValue<?> expValue = (ExpValue<?>) o;
 
         return Objects.equals(value, expValue.value);
     }
