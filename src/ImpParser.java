@@ -18,7 +18,7 @@ public class ImpParser extends Parser {
 	public static final int
 		T__0=1, NAT=2, BOOL=3, PLUS=4, MINUS=5, MUL=6, DIV=7, MOD=8, POW=9, AND=10, 
 		OR=11, EQQ=12, NEQ=13, LEQ=14, GEQ=15, LT=16, GT=17, NOT=18, IF=19, THEN=20, 
-		ELSE=21, WHILE=22, SKIPP=23, ASSIGN=24, OUT=25, FOR=26, DO=27, ELSEIF=28, 
+		ELSE=21, WHILE=22, SKIPP=23, ASSIGN=24, OUT=25, ELSEIF=26, DO=27, FOR=28, 
 		ND=29, LPAR=30, RPAR=31, LBRACE=32, RBRACE=33, SEMICOLON=34, ID=35, WS=36;
 	public static final int
 		RULE_prog = 0, RULE_com = 1, RULE_exp = 2;
@@ -33,8 +33,8 @@ public class ImpParser extends Parser {
 		return new String[] {
 			null, "','", null, null, "'+'", "'-'", "'*'", "'/'", "'mod'", "'^'", 
 			"'&'", "'|'", "'=='", "'!='", "'<='", "'>='", "'<'", "'>'", "'!'", "'if'", 
-			"'then'", "'else'", "'while'", "'skip'", "'='", "'out'", "'for'", "'do'", 
-			"'elseif'", "'nd'", "'('", "')'", "'{'", "'}'", "';'"
+			"'then'", "'else'", "'while'", "'skip'", "'='", "'out'", "'elseif'", 
+			"'do'", "'for'", "'nd'", "'('", "')'", "'{'", "'}'", "';'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -42,7 +42,7 @@ public class ImpParser extends Parser {
 		return new String[] {
 			null, null, "NAT", "BOOL", "PLUS", "MINUS", "MUL", "DIV", "MOD", "POW", 
 			"AND", "OR", "EQQ", "NEQ", "LEQ", "GEQ", "LT", "GT", "NOT", "IF", "THEN", 
-			"ELSE", "WHILE", "SKIPP", "ASSIGN", "OUT", "FOR", "DO", "ELSEIF", "ND", 
+			"ELSE", "WHILE", "SKIPP", "ASSIGN", "OUT", "ELSEIF", "DO", "FOR", "ND", 
 			"LPAR", "RPAR", "LBRACE", "RBRACE", "SEMICOLON", "ID", "WS"
 		};
 	}
@@ -269,11 +269,11 @@ public class ImpParser extends Parser {
 		public TerminalNode RBRACE(int i) {
 			return getToken(ImpParser.RBRACE, i);
 		}
-		public TerminalNode ELSE() { return getToken(ImpParser.ELSE, 0); }
 		public List<TerminalNode> ELSEIF() { return getTokens(ImpParser.ELSEIF); }
 		public TerminalNode ELSEIF(int i) {
 			return getToken(ImpParser.ELSEIF, i);
 		}
+		public TerminalNode ELSE() { return getToken(ImpParser.ELSE, 0); }
 		public IfContext(ComContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
@@ -335,7 +335,6 @@ public class ImpParser extends Parser {
 		ComContext _prevctx = _localctx;
 		int _startState = 2;
 		enterRecursionRule(_localctx, 2, RULE_com, _p);
-		int _la;
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
@@ -365,15 +364,11 @@ public class ImpParser extends Parser {
 				com(0);
 				setState(17);
 				match(RBRACE);
-				setState(36);
+				setState(28);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,1,_ctx) ) {
-				case 1:
-					{
-					setState(28);
-					_errHandler.sync(this);
-					_la = _input.LA(1);
-					while (_la==ELSEIF) {
+				_alt = getInterpreter().adaptivePredict(_input,0,_ctx);
+				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
+					if ( _alt==1 ) {
 						{
 						{
 						setState(18);
@@ -391,11 +386,17 @@ public class ImpParser extends Parser {
 						setState(24);
 						match(RBRACE);
 						}
-						}
-						setState(30);
-						_errHandler.sync(this);
-						_la = _input.LA(1);
+						} 
 					}
+					setState(30);
+					_errHandler.sync(this);
+					_alt = getInterpreter().adaptivePredict(_input,0,_ctx);
+				}
+				setState(36);
+				_errHandler.sync(this);
+				switch ( getInterpreter().adaptivePredict(_input,1,_ctx) ) {
+				case 1:
+					{
 					setState(31);
 					match(ELSE);
 					setState(32);
@@ -1016,14 +1017,14 @@ public class ImpParser extends Parser {
 		"\3\2\6\7\3\2\20\23\3\2\16\17\3\2\f\r\2\u0093\2\b\3\2\2\2\4U\3\2\2\2\6"+
 		"i\3\2\2\2\b\t\5\4\3\2\t\n\7\2\2\3\n\3\3\2\2\2\13\f\b\3\1\2\f\r\7\25\2"+
 		"\2\r\16\7 \2\2\16\17\5\6\4\2\17\20\7!\2\2\20\21\7\26\2\2\21\22\7\"\2\2"+
-		"\22\23\5\4\3\2\23&\7#\2\2\24\25\7\36\2\2\25\26\7 \2\2\26\27\5\6\4\2\27"+
-		"\30\7!\2\2\30\31\7\"\2\2\31\32\5\4\3\2\32\33\7#\2\2\33\35\3\2\2\2\34\24"+
-		"\3\2\2\2\35 \3\2\2\2\36\34\3\2\2\2\36\37\3\2\2\2\37!\3\2\2\2 \36\3\2\2"+
-		"\2!\"\7\27\2\2\"#\7\"\2\2#$\5\4\3\2$%\7#\2\2%\'\3\2\2\2&\36\3\2\2\2&\'"+
-		"\3\2\2\2\'V\3\2\2\2()\7%\2\2)*\7\32\2\2*V\5\6\4\2+V\7\31\2\2,-\7\30\2"+
-		"\2-.\7 \2\2./\5\6\4\2/\60\7!\2\2\60\61\7\"\2\2\61\62\5\4\3\2\62\63\7#"+
-		"\2\2\63V\3\2\2\2\64\65\7\33\2\2\65\66\7 \2\2\66\67\5\6\4\2\678\7!\2\2"+
-		"8V\3\2\2\29:\7\34\2\2:;\7 \2\2;<\5\4\3\2<=\7$\2\2=>\5\6\4\2>?\7$\2\2?"+
+		"\22\23\5\4\3\2\23\36\7#\2\2\24\25\7\34\2\2\25\26\7 \2\2\26\27\5\6\4\2"+
+		"\27\30\7!\2\2\30\31\7\"\2\2\31\32\5\4\3\2\32\33\7#\2\2\33\35\3\2\2\2\34"+
+		"\24\3\2\2\2\35 \3\2\2\2\36\34\3\2\2\2\36\37\3\2\2\2\37&\3\2\2\2 \36\3"+
+		"\2\2\2!\"\7\27\2\2\"#\7\"\2\2#$\5\4\3\2$%\7#\2\2%\'\3\2\2\2&!\3\2\2\2"+
+		"&\'\3\2\2\2\'V\3\2\2\2()\7%\2\2)*\7\32\2\2*V\5\6\4\2+V\7\31\2\2,-\7\30"+
+		"\2\2-.\7 \2\2./\5\6\4\2/\60\7!\2\2\60\61\7\"\2\2\61\62\5\4\3\2\62\63\7"+
+		"#\2\2\63V\3\2\2\2\64\65\7\33\2\2\65\66\7 \2\2\66\67\5\6\4\2\678\7!\2\2"+
+		"8V\3\2\2\29:\7\36\2\2:;\7 \2\2;<\5\4\3\2<=\7$\2\2=>\5\6\4\2>?\7$\2\2?"+
 		"@\5\4\3\2@A\7!\2\2AB\7\"\2\2BC\5\4\3\2CD\7#\2\2DV\3\2\2\2EF\7\35\2\2F"+
 		"G\7\"\2\2GH\5\4\3\2HI\7#\2\2IJ\7\30\2\2JK\7 \2\2KL\5\6\4\2LM\7!\2\2MV"+
 		"\3\2\2\2NO\7\37\2\2OP\7 \2\2PQ\5\4\3\2QR\7\3\2\2RS\5\4\3\2ST\7!\2\2TV"+
