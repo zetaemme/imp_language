@@ -214,7 +214,7 @@ public class IntImp extends ImpBaseVisitor<Value> {
     public ComValue visitDoWhile(ImpParser.DoWhileContext ctx) {
         visitCom(ctx.com());
 
-        while(!visitBoolExp(ctx.exp())) {
+        while(visitBoolExp(ctx.exp())) {
             visitCom(ctx.com());
         }
 
@@ -234,12 +234,18 @@ public class IntImp extends ImpBaseVisitor<Value> {
 
     @Override
     public ComValue visitIf(ImpParser.IfContext ctx) {
+        ComValue result = null;
+
         for (int i = 0; i < ctx.exp().size(); i++) {
             if (visitBoolExp(ctx.exp(i))) {
-                return visitCom(ctx.com(i));
+                result = visitCom(ctx.com(i));
             }
         }
 
-        return ComValue.INSTANCE;
+        if(ctx.ELSE() != null) {
+            result = visitCom(ctx.com(ctx.exp().size()));
+        }
+
+        return result;
     }
 }
