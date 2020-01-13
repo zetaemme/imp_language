@@ -234,18 +234,16 @@ public class IntImp extends ImpBaseVisitor<Value> {
 
     @Override
     public ComValue visitIf(ImpParser.IfContext ctx) {
-        ComValue result = null;
-
         for (int i = 0; i < ctx.exp().size(); i++) {
             if (visitBoolExp(ctx.exp(i))) {
-                result = visitCom(ctx.com(i));
+                return visitCom(ctx.com(i));
             }
         }
 
         if(ctx.ELSE() != null) {
-            result = visitCom(ctx.com(ctx.exp().size()));
+            return visitCom(ctx.com(ctx.exp().size()));
         }
 
-        return result;
+        return null; // dumb return (non-reachable code)
     }
 }
